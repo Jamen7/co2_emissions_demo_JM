@@ -2,6 +2,8 @@
 title: "Workshop Exercise: Emissions Data - Table, Map, and Chart"
 format: html
 author: "James Matosse"
+execute: 
+  echo: true
 ---
 
 # Introduction
@@ -38,6 +40,13 @@ import numpy as np
 import plotly.express as px
 from itables import show
 import country_converter as coco
+from IPython.display import HTML
+```
+
+```{python}
+import warnings
+# Ignore all warnings
+warnings.filterwarnings("ignore")
 ```
 
 Load in your dataset from gapminder below. View it in your data viewer to get an idea of the structure.
@@ -101,6 +110,12 @@ table_df["Relative Change"] = table_df["Relative Change"].round(0).astype(str) +
 Now we can display this as an interactive table with itables:
 
 ```{python}
+
+# Display a caption above the table using HTML
+caption_html = "<div style='text-align: left; font-weight: bold;'>Annual consumption-based CO₂ emissions</div>"
+
+# Render the caption before the table
+display(HTML(caption_html))
 show(table_df)
 ```
 
@@ -155,7 +170,7 @@ This will be animated by year.
 ```{python}
 # Convert country names to ISO3 codes
 emissions_long_1990_2022["country_code"] = coco.convert(
-    emissions_long_1990_2022["country"], to="ISO3"
+    emissions_long_1990_2022["country"], to="ISO3", not_found=None
 )
 
 fig_map = px.choropleth(
@@ -181,11 +196,20 @@ author: "James Matosse"
 format: html
 ---
 
+**Consumption-based CO₂ emissions**
+
+Consumption-based emissions include those from fossil fuels and industry. Land-use change emissions are not included.
+
 ::: {.panel-tabset}
 
 ## Table
 
 ```{python}
+# Display a caption above the table using HTML
+caption_html = "<div style='text-align: left; font-weight: bold;'>Annual consumption-based CO₂ emissions</div>"
+
+# Render the caption before the table
+display(HTML(caption_html))
 show(table_df)
 ```
 
