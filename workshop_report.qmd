@@ -68,7 +68,7 @@ emissions_long_1990_2022 = emissions_long.query('year >=1990 and year <=2022')
 countries_of_interest = emissions_long_1990_2022.query('country == ["Uganda", "South Africa", "Ghana", "Nigeria", "Japan"]')
 
 # Create line chart. Year should be on the x-axis, emissions on the y-axis, and color should be by country.
-fig_chart = px.line(countries_of_interest, x='year', y='emissions', color='country')
+fig_chart = px.line(countries_of_interest, x='year', y='emissions', color='country', title= 'CO2 Emissions (1990-2022) for Selected Countries', labels= {'emissions': 'Emissions', 'year': 'Year', 'country': 'Country'})
 
 ```
 
@@ -85,13 +85,14 @@ fig_map = px.choropleth(
     hover_name="country",
     animation_frame="year",
     title="Global CO2 Emissions (1990-2022)",
+    labels= {'emissions': 'Emissions', 'year': 'Year'}
 )
 
 ```
 
 **Consumption-based CO₂ emissions**
 
-Consumption-based emissions include those from fossil fuels and industry. Land-use change emissions are not included.
+Consumption-based emissions include those from fossil fuels and industry.
 
 
 ::: {.panel-tabset}
